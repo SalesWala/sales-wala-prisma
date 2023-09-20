@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "@saleswala:registry": "https://npm.pkg.github.com"
+  },
   "bugs": {
     "url": "https://github.com/SalesWala/sales-wala-prisma/issues"
   },
