@@ -1,0 +1,188 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Plan {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  expiresAt DateTime [not null]
+  planType PlanType [not null, default: 'FREEMIUM']
+  isTrial Boolean [not null]
+  isAdFree Boolean [not null]
+  maxParticipants Int [not null, default: 4]
+}
+
+Table PlanPurchase {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  transactionHash String [not null]
+  modeOfPayment String [not null]
+  amountInINR String [not null]
+  amountInPaidCurrency String [not null]
+  paymentCurrencyName String [not null]
+  isConfirmed Boolean [not null]
+  planId String [not null]
+  organisationId String [not null]
+}
+
+Table Organisation {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null, note: '@DtoReadOnly']
+  updatedAt DateTime [not null, note: '@DtoReadOnly']
+  email String [unique, not null]
+  name String [not null]
+  address String
+  metadata String
+  activePlanId String
+}
+
+Table SalesWalaAdmin {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  email String [unique, not null]
+  password String [not null]
+  firstname String
+  lastname String
+  metadata String
+}
+
+Table SalesWalaAppUser {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  email String [unique, not null]
+  password String [not null]
+  firstname String
+  lastname String
+  role UserRole [not null]
+  organisationId String
+  metadata String
+  isVerified Boolean [not null]
+  deviceId String
+  isEnabled Boolean [not null, default: true]
+}
+
+Table Products {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  defaultPrice String [not null]
+  metadata String
+  organisationId String
+  isDisabled Boolean [not null, default: false]
+}
+
+Table Vendor {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  metadata String
+  creatorId String
+  organisationId String
+}
+
+Table QuotationParticulars {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  productId String
+  metadata String
+  quotationId String
+}
+
+Table Quotation {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  metadata String
+  creatorId String
+  organisationId String [not null]
+  vendorId String [not null]
+  hasConvertedToOrder Boolean [not null]
+  orderState OrderStatus [not null, default: 'NONE']
+}
+
+Table Attendance {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  metadata String
+  punchInTime DateTime [default: `now()`, not null]
+  punchOutTime DateTime
+  userID String
+  attendanceStatus AttendanceStatus [not null, default: 'PRESENT']
+}
+
+Table LocationLog {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  location String
+  attendanceId String [not null]
+}
+
+Table Task {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  metadata String
+  creatorId String [not null]
+  assignedToId String [not null]
+  status TaskStatus [not null, default: 'PENDING']
+}
+
+Table Expense {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  amount String [not null]
+  metadata String
+  paymentStatus ExpensePaymentStatus [not null, default: 'PENDING']
+  creatorId String
+}
+
+Table Announcement {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  metadata String
+  organisationId String
+}
+
+Enum PlanType {
+  FREEMIUM
+  PREMIUM
+}
+
+Enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LEAVE
+  HOLIDAY
+}
+
+Enum UserRole {
+  SALES_MANAGER
+  SALES_PERSON
+}
+
+Enum OrderStatus {
+  NONE
+  PENDING
+  FINISHED
+  CANCELLED
+}
+
+Enum TaskStatus {
+  PENDING
+  ONGOING
+  FINISHED
+}
+
+Enum ExpensePaymentStatus {
+  PENDING
+  PAID
+  CANCELLED
+}
