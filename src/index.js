@@ -14,7 +14,6 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const createContext = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     // Skip if you are not using a serverless environment
-    ctx.callbackWaitsForEmptyEventLoop = false;
     return Object.assign(Object.assign({}, ctx), { prisma });
 });
 exports.createContext = createContext;
