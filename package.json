@@ -1,39 +1,25 @@
 {
   "name": "@saleswala/prisma",
-  "version": "1.0.1",
-  "description": "",
-  "main": "src/index.js",
+  "version": "0.0.1",
+  "description": "Shared Prisma Client Example",
   "scripts": {
-    "build": "tsc && npx prisma generate",
-    "postinstall": "npx prisma generate",
-    "db:introspect": "dotenv -- prisma introspect",
-    "db:generate": "dotenv -- prisma generate",
-    "test": "echo test",
-    "release": "standard-version && git push --follow-tags && npm publish"
+    "migrate": "prisma migrate",
+    "postinstall": "prisma generate"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SalesWala/sales-wala-prisma.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "publishConfig": {
-    "@saleswala:registry": "https://npm.pkg.github.com"
-  },
-  "bugs": {
-    "url": "https://github.com/SalesWala/sales-wala-prisma/issues"
-  },
-  "homepage": "https://github.com/SalesWala/sales-wala-prisma#readme",
   "devDependencies": {
-    "dotenv-cli": "^4.0.0",
-    "standard-version": "^9.5.0",
-    "typescript": "^5.2.2"
+    "dotenv-cli": "^7.2.1",
+    "@prisma/client": "^4.15.0",
+    "prisma": "^4.15.0"
   },
-  "dependencies": {
-    "@prisma/client": "^5.3.1",
-    "@vegardit/prisma-generator-nestjs-dto": "^1.5.1",
-    "prisma": "^5.3.1",
-    "prisma-dbml-generator": "0.11.0-dev.0"
-  }
+  "peerDependencies": {
+    "@prisma/client": "*",
+    "prisma": "*"
+  },
+  "main": "client/index.js",
+  "types": "client/index.d.ts",
+  "files": [
+    "client/index.js",
+    "client/index.d.ts",
+    "schema.prisma"
+  ]
 }
